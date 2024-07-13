@@ -378,3 +378,12 @@ function vancoufur_show_latest_news() {
     <?php
 }
 add_shortcode('vancoufur_news', 'vancoufur_show_latest_news');
+
+add_filter( 'oembed_response_data', 'disable_embeds_filter_oembed_response_data_' );
+function disable_embeds_filter_oembed_response_data_( $data ) {
+    unset($data['author_url']);
+    unset($data['author_name']);
+    return $data;
+}
+
+add_filter('woocommerce_should_load_paypal_standard', '__return_false');
