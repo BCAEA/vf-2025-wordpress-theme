@@ -1,11 +1,11 @@
-=== Vancoufur 2023 WordPress Theme ===
+=== Vancoufur 2025 WordPress Theme ===
 
 Contributors: Vancoufur, LinuxPony
-Theme link: https://github.com/sonicer105/vf-2023
+Theme link: https://github.com/BCAEA/vf-2025-wordpress-theme
 Tags: one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
 Requires at least: 6.0.1
 Tested up to: 6.0.1
-License: GNU General Public License v3 or Later
+License: Code is licensed under the GNU General Public License v3 or Later
 License URI: https://www.gnu.org/licenses/gpl.html
 
 Based on BlankSlate by tidythemes, bhadaway
@@ -14,5 +14,5 @@ Please read: tidythemes.com/concept.
 
 == Description ==
 
-WordPress Theme for Vancoufur 2023. Released under the GPL.
+WordPress Theme for Vancoufur 2025. Code released under the GPL.
 
