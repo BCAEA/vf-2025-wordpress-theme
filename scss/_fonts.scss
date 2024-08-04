@@ -1,24 +1,17 @@
-/* Minerva Bold */
+/* Bahnschrift Regular */
 @font-face {
-    font-family: 'Minerva';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(./fonts/minerva-bold.woff);
-}
-/* Minerva Regular */
-@font-face {
-    font-family: 'Minerva';
+    font-family: "Bahnschrift";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(./fonts/minerva-regular.woff);
+    src: url(./fonts/bahnschrift.woff2);
 }
-/* Smythe Regular */
+  
+/* BebasNeue Regular */
 @font-face {
-    font-family: 'Smythe';
+    font-family: "BebasNeue";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(./fonts/smythe-regular.woff2) format('woff2');
+    src: url(./fonts/BebasNeue-Regular.woff2);
 }

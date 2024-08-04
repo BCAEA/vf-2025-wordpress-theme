@@ -1,0 +1,19 @@
+{
+  "name": "vf-2025-wordpress-theme",
+  "version": "1.0.0",
+  "description": "WordPress Theme used by Vancoufur in 2025.",
+  "scripts": {
+    "scss": "gulp"
+  },
+  "keywords": [],
+  "author": "LinuxPony <sonic.ert@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "gulp": "^5.0.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "sass": "^1.77.8"
+  }
+}

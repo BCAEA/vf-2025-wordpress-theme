@@ -1,1 +1,4 @@
 /scss/.sass-cache/
+/node_modules
+*.png.webp
+*.jpg.webp

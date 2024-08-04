@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Default Template
+ */
+get_header(); ?>
     <main id="content" class="standard">
         <?php if (have_posts()){
             while (have_posts()){

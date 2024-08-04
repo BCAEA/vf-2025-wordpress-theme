@@ -1,0 +1,9 @@
+# Disallow access to gulpfile.js, package.json, and package-lock.json
+<FilesMatch "^(gulpfile\.js|package\.json|package-lock\.json)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Disallow access to node_modules, .git, and .vscode directories
+RewriteEngine On
+RewriteRule ^(node_modules|\.git|\.vscode) - [F,L]

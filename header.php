@@ -20,6 +20,20 @@
 <body <?php body_class(); ?>>
 <div id="wrapper" class="hfeed">
     <header id="header">
+        <nav id="social">
+            <div class="nav-wrapper">
+                <div class="menu-wrapper">
+                    <?php wp_nav_menu(array(
+                        'theme_location'  => 'social-menu',
+                        'container_class' => 'social-menu',
+                        'walker'          => new Social_Nav_Walker(),
+                        'link_before'     => '',
+                        'link_after'      => '',
+                        'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                    )); ?>
+                </div>
+            </div>
+        </nav>
         <nav id="menu">
             <a href="#" aria-hidden="true" class="menu-toggle-mobile"><span class="fas fa-bars"></span></a>
             <div class="nav-wrapper">

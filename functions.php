@@ -1,6 +1,6 @@
 <?php
 
-define('VF_THEME_VER', '1.6.0');
+define('VF_THEME_VER', '1.6.1');
 
 add_action('after_setup_theme', 'vancoufur_setup');
 function vancoufur_setup() {
@@ -15,7 +15,7 @@ function vancoufur_setup() {
         $content_width = 1920;
     }
     register_nav_menus(array('main-menu' => esc_html__('Main Menu', 'vancoufur')));
-    register_nav_menus(array('footer-menu' => esc_html__('Footer Menu', 'vancoufur')));
+    register_nav_menus(array('social-menu' => esc_html__('Social Menu', 'vancoufur')));
 }
 
 add_action('wp_enqueue_scripts', 'vancoufur_load_scripts');
@@ -387,3 +387,98 @@ function disable_embeds_filter_oembed_response_data_( $data ) {
 }
 
 add_filter('woocommerce_should_load_paypal_standard', '__return_false');
+
+function support_webp() {
+    return strpos( $_SERVER['HTTP_ACCEPT'], 'image/webp' ) !== false;
+}
+
+
+class Social_Nav_Walker extends Walker_Nav_Menu {
+    // Start Level
+    function start_lvl( &$output, $depth = 0, $args = array() ) {
+        // Do nothing, no sub-menus
+    }
+
+    // End Level
+    function end_lvl( &$output, $depth = 0, $args = array() ) {
+        // Do nothing, no sub-menus
+    }
+
+    // Start Element
+    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+        $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+        $class_names = $value = '';
+
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+        $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+        $class_names = ' class="' . esc_attr( $class_names ) . '"';
+
+        $id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
+        $id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
+
+        $output .= $indent . '<li' . $id . $value . $class_names .'>';
+
+        $atts = array();
+        $atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : $item->title;
+        $atts['target'] = ! empty( $item->target )     ? $item->target     : '';
+        $atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
+        $atts['href']   = ! empty( $item->url )        ? $item->url        : '';
+
+        $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
+
+        $attributes = '';
+        foreach ( $atts as $attr => $value ) {
+            if ( ! empty( $value ) ) {
+                $value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+                $attributes .= ' ' . $attr . '="' . $value . '"';
+            }
+        }
+
+        // Detect the social media platform and choose the appropriate icon
+        $icon_class = 'fas fa-globe'; // Fallback icon
+        if ( strpos( $item->url, 'twitter.com' ) !== false ) {
+            $icon_class = 'fab fa-twitter';
+        }
+        else if ( strpos( $item->url, 'facebook.com' ) !== false ) {
+            $icon_class = 'fab fa-facebook';
+        }
+        else if ( strpos( $item->url, 'instagram.com' ) !== false ) {
+            $icon_class = 'fab fa-instagram';
+        }
+        else if ( strpos( $item->url, 'furaffinity.net' ) !== false ) {
+            $icon_class = 'fak fa-furaffinity';
+        }
+        else if ( strpos( $item->url, 'discord.gg' ) !== false ) {
+            $icon_class = 'fab fa-discord';
+        }
+        else if ( strpos( $item->url, 't.me' ) !== false ) {
+            $icon_class = 'fab fa-telegram';
+        }
+        else if ( strpos( $item->url, 'youtube.com' ) !== false ) {
+            $icon_class = 'fab fa-youtube';
+        }
+        else if ( strpos( $item->url, 'pinterest.com' ) !== false ) {
+            $icon_class = 'fab fa-pinterest';
+        }
+        else if ( strpos( $item->url, 'tiktok.com' ) !== false ) {
+            $icon_class = 'fab fa-tiktok';
+        }
+        else if ( strpos( $item->url, 'vancoufur.org' ) !== false ) {
+            $icon_class = 'fas fa-envelope';
+        }
+
+        $item_output = $args->before;
+        $item_output .= '<a'. $attributes .'>';
+        $item_output .= '<i class="' . $icon_class . '" aria-hidden="true"></i>';
+        $item_output .= '<span class="screen-reader-text">' . $atts['title'] . '</span>';
+        $item_output .= '</a>';
+        $item_output .= $args->after;
+
+        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+    }
+
+    // End Element
+    function end_el( &$output, $item, $depth = 0, $args = array() ) {
+        $output .= "</li>\n";
+    }
+}
